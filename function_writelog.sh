@@ -35,3 +35,4 @@ write_log 1 $foo
 write_log 0 $foo
 
 # Need to add functionality for adding hashes (for integrity checks) to the log as well
+# Add actually writing to the file once it looks good
