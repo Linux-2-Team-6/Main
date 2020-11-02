@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #***********************************#
-# hashme.sh					 		#
+# function_hashme.sh		 		#
 # author: michael					#
 # oct 29, 2020						#
 #									#
