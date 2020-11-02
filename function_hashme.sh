@@ -13,7 +13,7 @@ E_FILENOTFOUND=1
 
 # Declare file to hash, used for testing purposes
 #+ this will later be passed to the function by the backup script
-file='/home/hxp/Documents/Skola/one.log'
+file='one.log'
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 # hash_me ()										#
