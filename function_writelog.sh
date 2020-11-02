@@ -18,8 +18,8 @@ LOGFILE=backups.log
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 function write_log () {
-	STATUS=$1
-	BACKUP_FILENAME=$2 # Pass argument 1 to MESSAGE
+	STATUS=$1 # Pass argument 1 to STATUS
+	BACKUP_FILENAME=$2 # Pass argument 2 to BACKUP_FILENAME
 	if [[ $STATUS -eq 0 ]] # 0 = Successful backup
 	then
 		echo "["$(date +"%F %H:%M:%S")"] Backup OK: $BACKUP_FILENAME"
