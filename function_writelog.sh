@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #***********************************#
-# writelog.sh				 		#
+# function_writelog.sh		 		#
 # author: michael					#
 # oct 31, 2020						#
 #									#

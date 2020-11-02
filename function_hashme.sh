@@ -33,5 +33,5 @@ function hashme () {
 	fi
 }
 
-# send $file to hashme ()
+# debug / test - send $file to hashme ()
 hashme $file
