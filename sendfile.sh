@@ -7,9 +7,9 @@ function sendshit () {
 	SOURCEFILE=$1 # Name of the file
 	TARGETLOCATION=$2 # The target location
 
-	if [[ $SOURCEFILE -f ]] && [[ $TARGETLOCATION -f ]]  
+	if [[ -f "$SOURCEFILE" ]] && [[ -f "$TARGETLOCATION" ]]  
 	then
-		mv [[$SOURCEFILE]] [[$TARGERLOCATION]]
+		mv "$SOURCEFILE" "$TARGETLOCATION"
 		echo "Succesfully moved!"
 
 	else
