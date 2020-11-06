@@ -9,6 +9,18 @@ K_FILENOTFOUND=1
 function sendshit () {
 	SOURCEFILE=$1 # Name of the file
 	TARGETLOCATION=$2 # The target location
+	
+	if [[ ! -e "$SOURCEFILE" ]]
+	then
+		echo "File does not exist"
+		exit
+	fi
+
+	if [[ ! -d "$TARGETLOCATION" ]]
+	then
+		echo "Location does not exist"
+		exit
+	fi	
 
 	if [[ -e "$SOURCEFILE" ]] && [[ -d "$TARGETLOCATION" ]] 
 	then
