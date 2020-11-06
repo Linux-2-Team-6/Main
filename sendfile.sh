@@ -15,10 +15,11 @@ function sendshit () {
 		mv "$SOURCEFILE" "$TARGETLOCATION"
 	fi
 
-	if [["!$" -eq 0 ]]
+	if [ "$?" -eq 0 ]
+	then
 		echo "Succesfully moved!"
 
-	elif [["$?" -eq 1 ]]
+	elif [ "$?" -eq 1 ]
 	then
 		echo "Error, check your shit"	
 	fi
