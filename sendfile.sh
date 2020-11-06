@@ -11,14 +11,16 @@ function sendshit () {
 	TARGETLOCATION=$2 # The target location
 
 	if [[ -e "$SOURCEFILE" ]] && [[ -d "$TARGETLOCATION" ]] 
-
-		mv "$SOURCEFILE" "$TARGETLOCATION"
 	then
+		mv "$SOURCEFILE" "$TARGETLOCATION"
+	fi
+
+	if [["!$" -eq 0 ]]
 		echo "Succesfully moved!"
 
-	else
+	elif [["$?" -eq 1 ]]
+	then
 		echo "Error, check your shit"	
-		return $K_FILENOTFOUND
 	fi
 
 }
