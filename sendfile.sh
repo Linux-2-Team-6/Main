@@ -3,18 +3,25 @@
 # 2 arguments: 1(Sourcefile: 2(Targetlocation
 
 
+# Declare error code
+K_FILENOTFOUND=1
+
 function sendshit () {
 	SOURCEFILE=$1 # Name of the file
 	TARGETLOCATION=$2 # The target location
 
-	if [[ -f "$SOURCEFILE" ]] && [[ -f "$TARGETLOCATION" ]]  
+	if [[ -e "$SOURCEFILE" ]] && [[ -d "$TARGETLOCATION" ]]  
 	then
 		mv "$SOURCEFILE" "$TARGETLOCATION"
 		echo "Succesfully moved!"
 
 	else
 		echo "Error, check your shit"	
-
+		return $K_FILENOTFOUND
 	fi
 
 }
+
+echo $SOURCEFILE $TARGETLOCATION
+
+sendshit $SOURCEFILE $TARGETLOCATION
