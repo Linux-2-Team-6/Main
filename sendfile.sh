@@ -10,9 +10,10 @@ function sendshit () {
 	SOURCEFILE=$1 # Name of the file
 	TARGETLOCATION=$2 # The target location
 
-	if [[ -e "$SOURCEFILE" ]] && [[ -d "$TARGETLOCATION" ]]  
-	then
+	if [[ -e "$SOURCEFILE" ]] && [[ -d "$TARGETLOCATION" ]] 
+
 		mv "$SOURCEFILE" "$TARGETLOCATION"
+	then
 		echo "Succesfully moved!"
 
 	else
@@ -22,6 +23,6 @@ function sendshit () {
 
 }
 
-echo $SOURCEFILE $TARGETLOCATION
+echo "$SOURCEFILE" "$TARGETLOCATION"
 
-sendshit $SOURCEFILE $TARGETLOCATION
+sendshit "$1" "$2"
