@@ -25,17 +25,18 @@ function sendshit () {
 	if [[ -e "$SOURCEFILE" ]] && [[ -d "$TARGETLOCATION" ]] 
 	then
 		mv "$SOURCEFILE" "$TARGETLOCATION"
+		echo "Moving file.."
+	
+		if [[ "$?" -eq 0 ]]
+		then
+			echo "Succesfully moved!"
+		elif [[ "$?" -eq 1 ]]
+		then
+			echo "Error, check your shit"
+		else
+			echo "Something is wrong"	
 	fi
-
-	if [ "$?" -eq 0 ]
-	then
-		echo "Succesfully moved!"
-
-	elif [ "$?" -eq 1 ]
-	then
-		echo "Error, check your shit"	
-	fi
-
+fi
 }
 
 echo "$SOURCEFILE" "$TARGETLOCATION"
