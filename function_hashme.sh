@@ -10,7 +10,7 @@
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 # hash_me ()                                        #
-# Parameter: target	file name                       #
+# Parameter: target file name                       #
 # returns 0 on success, 1 if file doesn't exists    #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 
