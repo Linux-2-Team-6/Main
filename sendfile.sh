@@ -10,7 +10,7 @@ function sendshit () {
 	SOURCEFILE=$1 # Name of the file
 	TARGETLOCATION=$2 # The target location
 	
-	if [[ ! -e "$SOURCEFILE" ]]
+	if [[ ! -f "$SOURCEFILE" ]]
 	then
 		echo "File does not exist"
 		exit
@@ -22,7 +22,7 @@ function sendshit () {
 		exit
 	fi	
 
-	if [[ -e "$SOURCEFILE" ]] && [[ -d "$TARGETLOCATION" ]] 
+	if [[ -f "$SOURCEFILE" && -d "$TARGETLOCATION" ]] 
 	then
 		mv "$SOURCEFILE" "$TARGETLOCATION"
 		echo "Moving file.."
