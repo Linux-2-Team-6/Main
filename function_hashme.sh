@@ -8,13 +8,6 @@
 # Hash files for integrity check    #
 #***********************************#
 
-# Declare error codes
-E_FILENOTFOUND=1
-
-# Declare file to hash, used for testing purposes
-#+ this will later be passed to the function by the backup script
-file='hash.log'
-
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 # hash_me ()                                        #
 # Parameter: target	file name                       #
@@ -22,16 +15,16 @@ file='hash.log'
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 function hashme () {
- FILENAME=$1 # Pass argument 1 to FILENAME
- if [ -f $FILENAME ] # Check if file exists
+ local FILENAME=$1 # Pass argument 1 to FILENAME
+ if [[ -f $FILENAME ]] # Check if file exists, return file hash and success
  then
   file_hash=$(sha256sum $FILENAME)
   echo $file_hash
-  return 0 # success
- else # if file doesn't exist, return error 1
-  return $E_FILENOTFOUND
+  HASH_STATUS=0
+ else # if file doesn't exist, return fail
+  HASH_STATUS=1
  fi
 }
 
 # debug / test - send $file to hashme ()
-#hashme $file
+#hashme $1

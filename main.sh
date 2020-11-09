@@ -28,8 +28,17 @@ function backup () { # placeholder
  # hash again and compare to earlier hash
  # write success/fail to log
 
+ # testing hash
+ res1=$(hashme backups.log)
+ res2=$(hashme README.md)
+ if [[ "$res1" == "$res2" ]]
+ then
+ 	echo "$res1 is equal to $res2"
+ else
+ 	echo "Checksum failed"
+ fi
  # testing write to log
- write_log 1 backup-test.tar.gz
+ writelog 0 backup-test.tar.gz
 
  }
 

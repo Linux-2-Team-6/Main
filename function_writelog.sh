@@ -21,7 +21,7 @@ LOG_FAIL=1
 # timestamp is added to the log entry               #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-function write_log () {
+function writelog () {
  local STATUS=$1 # Pass argument 1 to STATUS
  local BACKUP_FILENAME=$2 # Pass argument 2 to BACKUP_FILENAME
 
