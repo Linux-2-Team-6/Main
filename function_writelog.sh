@@ -11,7 +11,7 @@
 # Declare logfile
 LOGFILE=backups.log
 
-# Declare local return codes
+# Declare return codes
 LOG_SUCCESS=0
 LOG_FAIL=1
 
@@ -25,13 +25,13 @@ function writelog () {
  local STATUS=$1 # Pass argument 1 to STATUS
  local BACKUP_FILENAME=$2 # Pass argument 2 to BACKUP_FILENAME
 
-  if [[ $STATUS -eq 0 ]] # 0 = Successful backup
+  if [[ "$STATUS" -eq 0 ]] # 0 = Successful backup
  then
-  echo "["$(date +"%F %H:%M:%S")"] Backup OK: $BACKUP_FILENAME" >> $LOGFILE
+  echo "["$(date +"%F %H:%M:%S")"] Backup OK: $BACKUP_FILENAME" >> "$LOGFILE"
   LOG_STATUS=$LOG_SUCCESS
- elif [[ $STATUS -eq 1 ]] # 1 = Failed backup
+ elif [[ "$STATUS" -eq 1 ]] # 1 = Failed backup
  then
-  echo "["$(date +"%F %H:%M:%S")"] Backup FAILED: $BACKUP_FILENAME" >> $LOGFILE
+  echo "["$(date +"%F %H:%M:%S")"] Backup FAILED: $BACKUP_FILENAME" >> "$LOGFILE"
   LOG_STATUS=$LOG_FAIL
  fi
 }
