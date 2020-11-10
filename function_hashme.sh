@@ -8,6 +8,10 @@
 # Hash files for integrity check    #
 #***********************************#
 
+# Declare return codes
+HASH_SUCCESS=0
+HASH_FAIL=1
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 # hash_me ()                                        #
 # Parameter: target file name                       #
@@ -20,9 +24,9 @@ function hashme () {
  then
   file_hash=$(sha256sum $FILENAME)
   echo $file_hash
-  HASH_STATUS=0
+  HASH_STATUS=$HASH_SUCCESS
  else # if file doesn't exist, return fail
-  HASH_STATUS=1
+  HASH_STATUS=$HASH_FAIL
  fi
 }
 
