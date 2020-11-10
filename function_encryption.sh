@@ -11,6 +11,8 @@
 # Problems
 #+ Why isn't the decryption prompted for a passphrase?
 #+ For automation we probably need keys instead of passphrase?
+#+ Probably need some changes if it's done to a file on a remote server, unless that connection is
+#+ a separate function that I can call before the encryption/decryption is done
 
 # Declare return codes
 CRYPTO_SUCCESS=0
