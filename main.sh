@@ -8,6 +8,7 @@
 # Main script v0.1                  #
 #***********************************#
 
+source function_getfiles.sh
 source function_hashme.sh
 source function_writelog.sh
 # source pack
@@ -22,11 +23,44 @@ function menu () {
 }
 
 function backup () { # placeholder
+ # get list of files to backup
  # pack file(s)
  # hash file
  # move file
  # hash again and compare to earlier hash
+ # encrypt file
  # write success/fail to log
+
+ # testing get files
+ #+ send these to pack next
+ local GET_TARGET=$1
+ if [[ "$GET_TARGET" == "full" ]] # get all the files
+ then
+  getfiles nginx home sysconfig mariadb # return arrays NGINX_FILES, HOME_FILES, SYS_FILES, MARIADB_FILES
+  echo "${NGINX_FILES[@]}"
+  echo "${MARIADB_FILES[@]}"
+  echo "${SYS_FILES[@]}"
+  echo "${HOME_FILES[@]}"
+ elif [[ "$GET_TARGET" == "nginx" ]] # get nginx files
+ then
+  getfiles nginx # returns array NGINX_FILES
+  echo "${NGINX_FILES[@]}"
+ elif [[ "$GET_TARGET" == "mariadb" ]] # get mariadb files
+ then
+  getfiles mariadb # returns array MARIADB_FILES
+  echo "${MARIADB_FILES[@]}"
+ elif [[ "$GET_TARGET" == "sysconfig" ]] # get sys config files
+ then
+  getfiles sysconfig # returns array SYS_FILES
+  echo "${SYS_FILES[@]}"
+ elif [[ "$GET_TARGET" == "home" ]] # get home dir
+ then
+  getfiles home # returns array HOME_FILES
+  echo "${HOME_FILES[@]}"
+ fi
+ # WORKS -------------
+
+ # testing pack
 
  # testing hash
  res1=$(hashme backups.log)
@@ -39,6 +73,8 @@ function backup () { # placeholder
  	echo "Checksum missmatch"
  fi
  # WORKS -------------
+
+ # testing move
 
  # testing encryption
  #encrypt derp
@@ -71,7 +107,7 @@ then
 elif [[ "$PARAM" == "-f" ]] || [[ "$PARAM" == "--full" ]] # Run full backup (used for scheduling)
 then
  echo "Running full backup..."
- backup
+ backup full
  if [[ "$LOG_STATUS" -eq 0 ]] # Check if function backup returned success
  then
   echo "Backup successful"
