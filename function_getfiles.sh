@@ -9,12 +9,11 @@
 # up                                #
 #***********************************#
 
-# Find if there are more files for nginx, mariadb
-#+ and all files for sysconfig
+# Check if there are more files for nginx, mariadb, sysconfig
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 # getfiles ()                                       #
-# Parameter: nginx, mariadb, sysconfig and/or home  #
+# Parameters: nginx, mariadb, sysconfig and/or home #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 
