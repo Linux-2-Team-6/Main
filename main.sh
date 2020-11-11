@@ -8,13 +8,14 @@
 # Main script v0.1                  #
 #***********************************#
 
+# source menu
 source function_getfiles.sh
-source function_hashme.sh
-source function_writelog.sh
 # source pack
 # source unpack
+source function_hashme.sh
 # source move
 source function_encryption.sh
+source function_writelog.sh
 # source schedule
 
 function menu () {
@@ -31,7 +32,7 @@ function backup () { # placeholder
  # encrypt file
  # write success/fail to log
 
- # testing get files
+ # testing getfiles
  #+ send these to pack next
  local GET_TARGET=$1
  if [[ "$GET_TARGET" == "full" ]] # get all the files
