@@ -8,14 +8,10 @@
 # Main script v0.1                  #
 #***********************************#
 
-# source menu
 source function_menu.sh
 source function_backup.sh
+# source restore
 # source schedule
-
-#function welcomemenu () { # placeholder
-# echo "...Menu not found..."
-#}
 
 if [[ $# -gt 1 ]] # Check if there is more than 1 parameter
 then
