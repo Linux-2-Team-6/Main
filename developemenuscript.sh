@@ -12,7 +12,7 @@
 # Which directories/configfiles/databases that should be backup
 
 # 
-# Below i've roughly done the functions that makes the number two (2) menu for each chose made
+# Below are the functions that makes the number two (2) menu for each choice made
 # in menu 1. The functions start with funcy so that they hopefully won't collide with other functions
 funcydatabase () {  #  
     echo "Choose a backup option: "
@@ -53,10 +53,12 @@ echo
 
 funcyconfig () {
     echo "Choose a backup option: "
-    echo "a: Mariadb"
-    echo "b: Mysql"
-    echo "c: Mariadb and Mysql"
-    echo "d: Exit"
+    echo "a: Fullbackup"
+    echo "b: Mariadb"
+    echo "c: Mysql"
+    echo "d: Mariadb and Mysql"
+    echo "e: Nginx"
+    echo "f: Exit"
     read -r -n1 REPLY                       
     echo ":Option $REPLY was chosen"        
 echo
@@ -64,13 +66,15 @@ echo
         "A" | "a" ) echo "it works!";;        
         "B" | "b" ) ;;
         "C" | "c" ) ;;
-        "D" | "d" ) exit 0;;
+        "D" | "d" ) ;;
+        "E" | "e" ) ;;
+        "F" | "f" ) exit 0;;
                 * ) echo "Please choose an option that is displayed "
         funcyconfig;;   
     esac
 }
 
-funcyfullbackup () {
+funcyfullbackup () {        # This option makes a fullbackup of the databases and the configfiles and home diretory
     echo "Choose a backup option: "
     echo "a: Mariadb"
     echo "b: Exit"
@@ -124,7 +128,9 @@ echo " ************************************************
 | Do not hesitate to make a backup of your data!|
 | With a blink of an eye                        |
 | everything can be lost!                       |
- ************************************************"
+|    A special thanks to the autors:            |
+|    Rickard, Michael, Mikko and Peter!         |
+*************************************************"
 echo "# You will now be able to choose what to backup"
 echo
 
@@ -140,10 +146,10 @@ do                                                  #
     echo "g: Exit "
 
     read -r -n1 REPLY                       #  
-    echo ":Option $REPLY was chosen"        # Test, se att variabel får rätt värde, kredd till DB
+    echo ":Option $REPLY was chosen"        # Test, so that the variable get the right value, kredd to DB
 echo 
     case "$REPLY" in                     # 
-        "A" | "a" ) funcyfullbackup;;        # RA: Tex vid case "a" så callas funktionen funcybackup
+        "A" | "a" ) funcyfullbackup;;        # RA: Example: In case "a" then the function funcyfullbackup gets called
         "B" | "b" ) funcyweb;;
         "C" | "c" ) funcydatabase;;
         "D" | "d" ) funcyconfig;;
@@ -155,6 +161,5 @@ done
 }
 
 welcomemenu "$@"
-
 
 exit 0
