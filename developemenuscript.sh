@@ -3,7 +3,7 @@
 #******************************************#
 # developemenuscript.sh                    #
 # author: Rickard Andersson                #
-# oct 29, 2020                             #
+# nov 12, 2020                             #
 #                                          #
 # A Menu for making backups                #
 #******************************************#
@@ -14,107 +14,116 @@
 # 
 # Below are the functions that makes the number two (2) menu for each choice made
 # in menu 1. The functions start with funcy so that they hopefully won't collide with other functions
-funcydatabase () {  #  
+funcydatabase () {  #  This menu is for the database backup
     echo "Choose a backup option: "
     echo "a: Mariadb"
     echo "b: Mysql"
     echo "c: Mariadb and Mysql"
-    echo "d: Exit"
+    echo "d: Return to main menu"
+    echo "e: Exit"
     read -r -n1 REPLY                       
     echo ":Option $REPLY was chosen"        
 echo
      case "$REPLY" in                   
-        "A" | "a" ) echo "it works!";;        
+        "A" | "a" ) ;;        
         "B" | "b" ) ;;
         "C" | "c" ) ;;
-        "D" | "d" ) exit 0;;
+        "D" | "d" ) return;;
+        "E" | "e" ) exit 0;;
                 * ) echo "Please choose a letter option that is displayed "
         funcydatabase;;
     esac
 } 
 
-funcyweb () {
+funcyweb () {   # This menu is for the web backup
     echo "Choose a backup option: "
     echo "a: "
     echo "b: "
-    echo "c: "
+    echo "c: Return to main menu"
     read -r -n1 REPLY                       
     echo ":Option $REPLY was chosen"        
 echo
      case "$REPLY" in                   
-        "A" | "a" ) echo "it works!";;        
+        "A" | "a" ) ;;        
         "B" | "b" ) ;;
-        "C" | "c" ) ;;
+        "C" | "c" ) return;;
         "D" | "d" ) exit 0;;
         * ) echo "Please choose an option that is displayed "
        funcyweb;;
     esac
 }
 
-funcyconfig () {
+funcyconfig () { # This  menu is for web backup
     echo "Choose a backup option: "
     echo "a: Fullbackup"
     echo "b: Mariadb"
     echo "c: Mysql"
     echo "d: Mariadb and Mysql"
     echo "e: Nginx"
-    echo "f: Exit"
-    read -r -n1 REPLY                       
-    echo ":Option $REPLY was chosen"        
-echo
-     case "$REPLY" in                   
-        "A" | "a" ) echo "it works!";;        
-        "B" | "b" ) ;;
-        "C" | "c" ) ;;
-        "D" | "d" ) ;;
-        "E" | "e" ) ;;
-        "F" | "f" ) exit 0;;
-                * ) echo "Please choose an option that is displayed "
-        funcyconfig;;   
-    esac
-}
-
-funcyfullbackup () {        # This option makes a fullbackup of the databases and the configfiles and home diretory
-    echo "Choose a backup option: "
-    echo "a: Mariadb"
-    echo "b: Exit"
-    read -r -n1 REPLY                       
-    echo ":Option $REPLY was chosen"        
-echo
-     case "$REPLY" in                   
-        "A" | "a" ) echo "it works!";;        
-        "B" | "b" ) ;;
-        "C" | "c" ) ;;
-        "D" | "d" ) exit 0;;
-                * ) echo "Please choose an option that is displayed "
-        funcyfullbackup  
-    esac
-}
-
-funcyhomedir () {
-    echo "Choose a backup option: "
-    echo "a: Home-directory"
-    echo "b: Exit"
+    echo "f: Return to main menu"
+    echo "g: Exit"
     read -r -n1 REPLY                       
     echo ":Option $REPLY was chosen"        
 echo
      case "$REPLY" in                   
         "A" | "a" ) ;;        
-        "B" | "b" ) exit 0;;
+        "B" | "b" ) ;;
+        "C" | "c" ) ;;
+        "D" | "d" ) ;;
+        "E" | "e" ) ;;
+        "F" | "f" ) return;;
+        "G" | "g" ) exit 0;;
                 * ) echo "Please choose an option that is displayed "
-       funcyhomedir;;
+        funcyconfig;;   
     esac
 }
-funcydatabaseAhomedir () {
+
+funcyfullbackup () {        # This Menu is for fullbackup
     echo "Choose a backup option: "
-    echo "a: Home-directory and Database backup"
-    echo "b: Exit"
+    echo "a: Fullbackup"
+    echo "b: Return to main menu"
+    echo "c: Exit"
     read -r -n1 REPLY                       
     echo ":Option $REPLY was chosen"        
 echo
      case "$REPLY" in                   
-        "A" | "a" ) echo "it works!";;        
-        "D" | "d" ) exit 0;; 
+        "A" | "a" ) ;;        
+        "B" | "b" ) return;;
+        "C" | "c" ) exit 0;;
+                * ) echo "Please choose an option that is displayed "
+        funcyfullbackup;;  
+    esac
+}
+
+funcyhomedir () { # This menu is for home directory backup
+    echo "Choose a backup option: "
+    echo "a: Home-directory"
+    echo "b: Return to main menu"
+    echo "c: Exit"
+    read -r -n1 REPLY                       
+    echo ":Option $REPLY was chosen"        
+echo
+     case "$REPLY" in                   
+        "A" | "a" ) ;;        
+        "B" | "b" ) return;;
+        "C" | "c" ) exit 0;;
+                * ) echo "Please choose an option that is displayed "
+       funcyhomedir;;
+    esac
+}
+
+funcydatabaseAhomedir () { # This menu is for database and home directory combined
+    echo "Choose a backup option: "
+    echo "a: Home-directory and Database backup"
+    echo "b: Return to main menu"
+    echo "c: Exit"
+    read -r -n1 REPLY                       
+    echo ":Option $REPLY was chosen"        
+echo
+     case "$REPLY" in                   
+        "A" | "a" ) ;;        
+        "B" | "b" ) return;; 
+        "C" | "c" ) exit 0;;
                 * ) echo "Please choose an option that is displayed "
         funcydatabaseAhomedir;;
     esac
@@ -135,9 +144,9 @@ echo "# You will now be able to choose what to backup"
 echo
 
 while true                                          # This while loop makes the first menu!
-do                                                  #
+do          echo "Main Menu"                        #
     echo "Choose what you want to backup: a, b, c.."
-    echo "a: Full-Backup "
+    echo "a: Fullbackup "
     echo "b: Web "
     echo "c: Databases "
     echo "d: Configfiles "
@@ -148,8 +157,8 @@ do                                                  #
     read -r -n1 REPLY                       #  
     echo ":Option $REPLY was chosen"        # Test, so that the variable get the right value, kredd to DB
 echo 
-    case "$REPLY" in                     # 
-        "A" | "a" ) funcyfullbackup;;        # RA: Example: In case "a" then the function funcyfullbackup gets called
+    case "$REPLY" in                      
+        "A" | "a" ) funcyfullbackup;;        # Example: In case "a" then the function funcyfullbackup gets called
         "B" | "b" ) funcyweb;;
         "C" | "c" ) funcydatabase;;
         "D" | "d" ) funcyconfig;;
