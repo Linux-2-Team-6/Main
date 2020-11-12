@@ -23,17 +23,23 @@ function getfiles () {
  do
   local TARGET=$1
 
-  if [[ "$TARGET" == "nginx" ]]
+  if [[ "$TARGET" == "nginx_config" ]]
   then
    # declare array of nginx files to back up
-   NGINX_FILES=("/etc/nginx/nginx.conf" "/etc/nginx/conf.d/" "/etc/nginx/sites-available/" "/etc/nginx/sites-enabled/")
+   NGINX_CONFIG_FILES=("/etc/nginx/nginx.conf" "/etc/nginx/conf.d/" "/etc/nginx/sites-available/")
    #echo "${FILES[@]}"
-  elif [[ "$TARGET" == "mariadb" ]]
+  elif [[ "$TARGET" == "nginx_data" ]]
   then
-   # declare array of mariadb files to back up
-   MARIADB_FILES=("/etc/my.cnf" "/etc/mysql/my.cnf" "$HOME/.my.cnf")
+   NGINX_DATA_FILES=("/usr/share/nginx/")
+  elif [[ "$TARGET" == "mariadb_config" ]]
+  then
+   # declare array of mariadb config files to back up
+   MARIADB_CONFIG_FILES=("/etc/my.cnf" "/etc/mysql/my.cnf" "$HOME/.my.cnf")
    #echo "${FILES[@]}"
-   # db dump?
+  elif [[ "$TARGET" == "mariadb_data" ]]
+  then
+    # do a db dump
+    MARIADB_DATA_FILES=("x")
   elif [[ "$TARGET" == "sysconfig" ]]
   then
    # declare array of system config files to back up
