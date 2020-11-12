@@ -2,24 +2,17 @@
 
 packnpress () {
 
-	THETARGET="$@" # The chosen files
+	THETARGET+=($@) # The chosen files
 
-	if [[ ! -f "$THETARGET" ]]
+	if [[ ! -f "$THETARGET" ]] && [[ ! -d "$THETARGET" ]]	
 	then
-		echo "Can't find it"
+		echo "Not a valid source"
 		exit
-
 	fi
+	echo $@	
 
-	for files in $THETARGET
-	do
-		tar --backup -cvzf backups.tar.gz "$THETARGET"
-	done
-
-
-
-
+		tar --backup -cvzf backups.tar.gz "$@"
 
 }
 
-packnpress "$@"
+packnpress $@
