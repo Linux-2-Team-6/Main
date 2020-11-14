@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# This script will unpack and uncompress your zipfile.
+
 unpack-unpress () {
 
 	THETARFILE=$1 # The chosen files
 
-	if [[ ! -f "$THETARFILE" ]]	
+	if [[ ! -f "$THETARFILE" ]] # Checks if the file is an acceptable format.
 	then
 		echo "Not a valid source"
 		exit
@@ -14,7 +16,7 @@ unpack-unpress () {
 
 		if [[ -f "$THETARFILE" ]]
 		then
-			tar -xvzf "$THETARFILE"
+			tar -xvzf "$THETARFILE" # Here we the unpacking and uncompressing
 
 			echo "Succesfully Unpacked!"	
 		else
