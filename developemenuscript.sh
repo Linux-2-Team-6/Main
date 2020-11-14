@@ -8,26 +8,35 @@
 # A Menu for making backups                #
 #******************************************#
   
+source function_backup.sh
+
 # Open ups a menu so that that user kan choose
 # Which directories/configfiles/databases that should be backup
 
 # 
 # Below are the functions that makes the number two (2) menu for each choice made
 # in menu 1. The functions start with funcy so that they hopefully won't collide with other functions
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
+# funcydatabase ()                                  #
+# Parameter:                                        #
+#                                                   #
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
+
 funcydatabase () {  #  This menu is for the database backup
     echo "Choose a backup option: "
     echo "a: Mariadb"
-    echo "b: Mysql"
-    echo "c: Mariadb and Mysql"
+    echo "b: Nginx"
+    echo "c: Mariadb and Nginx "
     echo "d: Return to main menu"
     echo "e: Exit"
     read -r -n1 REPLY                       
     echo ":Option $REPLY was chosen"        
 echo
      case "$REPLY" in                   
-        "A" | "a" ) ;;        
-        "B" | "b" ) ;;
-        "C" | "c" ) ;;
+        "A" | "a" ) backup mariadb_data;;        
+        "B" | "b" ) backup nginx_data;;
+        "C" | "c" ) backup nginx_data && backup mariadb_data;;
         "D" | "d" ) return;;
         "E" | "e" ) exit 0;;
                 * ) echo "Please choose a letter option that is displayed "
@@ -35,16 +44,22 @@ echo
     esac
 } 
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
+# funcyweb ()                                       #
+# Parameter:                                        #
+#                                                   #
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
+
 funcyweb () {   # This menu is for the web backup
     echo "Choose a backup option: "
-    echo "a: "
-    echo "b: "
+    echo "a: Mariadb"
+    echo "b: Nginx"
     echo "c: Return to main menu"
     read -r -n1 REPLY                       
     echo ":Option $REPLY was chosen"        
 echo
      case "$REPLY" in                   
-        "A" | "a" ) ;;        
+        "A" | "a" ) backup;;        
         "B" | "b" ) ;;
         "C" | "c" ) return;;
         "D" | "d" ) exit 0;;
@@ -53,13 +68,18 @@ echo
     esac
 }
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
+# funcyconfig ()                                    #
+# Parameter:                                        #
+#                                                   #
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
+
 funcyconfig () { # This  menu is for web backup
     echo "Choose a backup option: "
     echo "a: Fullbackup"
     echo "b: Mariadb"
-    echo "c: Mysql"
-    echo "d: Mariadb and Mysql"
-    echo "e: Nginx"
+    echo "c: Nginx"
+    echo "d: Mariadb and Nginx"
     echo "f: Return to main menu"
     echo "g: Exit"
     read -r -n1 REPLY                       
@@ -67,16 +87,21 @@ funcyconfig () { # This  menu is for web backup
 echo
      case "$REPLY" in                   
         "A" | "a" ) ;;        
-        "B" | "b" ) ;;
-        "C" | "c" ) ;;
-        "D" | "d" ) ;;
-        "E" | "e" ) ;;
+        "B" | "b" ) backup mariadb_config;;
+        "C" | "c" ) backup nginx_config;;
+        "D" | "d" ) backup mariadb_config && backup nginx_config;;
         "F" | "f" ) return;;
         "G" | "g" ) exit 0;;
                 * ) echo "Please choose an option that is displayed "
         funcyconfig;;   
     esac
 }
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
+# funcyfullbackup ()                                #
+# Parameter:                                        #
+#                                                   #
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 funcyfullbackup () {        # This Menu is for fullbackup
     echo "Choose a backup option: "
@@ -87,13 +112,19 @@ funcyfullbackup () {        # This Menu is for fullbackup
     echo ":Option $REPLY was chosen"        
 echo
      case "$REPLY" in                   
-        "A" | "a" ) ;;        
+        "A" | "a" ) backup;;        
         "B" | "b" ) return;;
         "C" | "c" ) exit 0;;
                 * ) echo "Please choose an option that is displayed "
         funcyfullbackup;;  
     esac
 }
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
+# funcyhomedir()                                    #
+# Parameter:                                       #
+#                                                  #
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 funcyhomedir () { # This menu is for home directory backup
     echo "Choose a backup option: "
@@ -104,13 +135,19 @@ funcyhomedir () { # This menu is for home directory backup
     echo ":Option $REPLY was chosen"        
 echo
      case "$REPLY" in                   
-        "A" | "a" ) ;;        
+        "A" | "a" ) backup home;;        
         "B" | "b" ) return;;
         "C" | "c" ) exit 0;;
                 * ) echo "Please choose an option that is displayed "
        funcyhomedir;;
     esac
 }
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
+# funcydatabaseAhomedir ()                          #
+# Parameter:                                       #
+#                                                  #
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 funcydatabaseAhomedir () { # This menu is for database and home directory combined
     echo "Choose a backup option: "
@@ -121,7 +158,7 @@ funcydatabaseAhomedir () { # This menu is for database and home directory combin
     echo ":Option $REPLY was chosen"        
 echo
      case "$REPLY" in                   
-        "A" | "a" ) ;;        
+        "A" | "a" ) backup;;        
         "B" | "b" ) return;; 
         "C" | "c" ) exit 0;;
                 * ) echo "Please choose an option that is displayed "
@@ -130,6 +167,12 @@ echo
      
 }
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
+# welcomemenu ()                                    #
+# Parameter:                                        #
+#                                                   #
+#+++++++++++++++++++++++++++++++++++++++++++++++++++#
+
 welcomemenu () {
 # The echo command below makes a simple but pleasent welcome screen for the linux operator
 echo " ************************************************                   
@@ -137,7 +180,7 @@ echo " ************************************************
 | Do not hesitate to make a backup of your data!|
 | With a blink of an eye                        |
 | everything can be lost!                       |
-|    A special thanks to the autors:            |
+|    A special thanks to the authors:           |
 |    Rickard, Michael, Mikko and Peter!         |
 *************************************************"
 echo "# You will now be able to choose what to backup"
@@ -152,7 +195,8 @@ do          echo "Main Menu"                        #
     echo "d: Configfiles "
     echo "e: Homedir "
     echo "f: Databases+Homedir "
-    echo "g: Exit "
+    echo "g: RESTORE a backup "
+    echo "h: Exit "
 
     read -r -n1 REPLY                       #  
     echo ":Option $REPLY was chosen"        # Test, so that the variable get the right value, kredd to DB
@@ -164,7 +208,8 @@ echo
         "D" | "d" ) funcyconfig;;
         "E" | "e" ) funcyhomedir;;
         "F" | "f" ) funcydatabaseAhomedir;;
-        "G" | "g" ) break;;
+        "G" | "g" ) ;;
+        "H" | "h" ) break;;
     esac
 done
 }
