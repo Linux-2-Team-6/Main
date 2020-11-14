@@ -26,19 +26,15 @@ source function_backup.sh
 funcydatabase () {  #  This menu is for the database backup
     echo "Choose a backup option: "
     echo "a: Mariadb"
-    echo "b: Nginx"
-    echo "c: Mariadb and Nginx "
-    echo "d: Return to main menu"
-    echo "e: Exit"
+    echo "b: Return to main menu"
+    echo "c: Exit"
     read -r -n1 REPLY                       
     echo ":Option $REPLY was chosen"        
 echo
      case "$REPLY" in                   
-        "A" | "a" ) backup mariadb_data;;        
-        "B" | "b" ) backup nginx_data;;
-        "C" | "c" ) backup nginx_data && backup mariadb_data;;
-        "D" | "d" ) return;;
-        "E" | "e" ) exit 0;;
+        "A" | "a" ) backup mariadb_data;; 
+        "B" | "b" ) return;;
+        "C" | "c" ) exit 0;;
                 * ) echo "Please choose a letter option that is displayed "
         funcydatabase;;
     esac
@@ -52,15 +48,13 @@ echo
 
 funcyweb () {   # This menu is for the web backup
     echo "Choose a backup option: "
-    echo "a: Mariadb"
-    echo "b: Nginx"
-    echo "c: Return to main menu"
+    echo "a: Nginx"
+    echo "b: Return to main menu"
     read -r -n1 REPLY                       
     echo ":Option $REPLY was chosen"        
 echo
      case "$REPLY" in                   
-        "A" | "a" ) backup;;        
-        "B" | "b" ) ;;
+        "A" | "a" ) backup;;
         "C" | "c" ) return;;
         "D" | "d" ) exit 0;;
         * ) echo "Please choose an option that is displayed "
@@ -80,6 +74,7 @@ funcyconfig () { # This  menu is for web backup
     echo "b: Mariadb"
     echo "c: Nginx"
     echo "d: Mariadb and Nginx"
+    echo "e: System config "
     echo "f: Return to main menu"
     echo "g: Exit"
     read -r -n1 REPLY                       
@@ -89,7 +84,8 @@ echo
         "A" | "a" ) ;;        
         "B" | "b" ) backup mariadb_config;;
         "C" | "c" ) backup nginx_config;;
-        "D" | "d" ) backup mariadb_config && backup nginx_config;;
+        "D" | "d" ) backup mariadb_config nginx_config;;
+        "E" | "e" ) backup sys_config
         "F" | "f" ) return;;
         "G" | "g" ) exit 0;;
                 * ) echo "Please choose an option that is displayed "
