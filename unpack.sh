@@ -16,5 +16,3 @@ unpack-unpress () {
 		echo "Succesfully Unpacked!"	
 		fi
 	}
-
-unpack-unpress $1
