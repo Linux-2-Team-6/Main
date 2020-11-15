@@ -32,7 +32,7 @@ then
  echo
 elif [[ "$PARAM" == "-f" ]] || [[ "$PARAM" == "--full" ]] # Run full backup (used for scheduling)
 then
- backup sysconfig
+ backup full
  if [[ "$LOG_STATUS" -eq 0 ]] # Check if function backup returned success
  then
   echo "Backup successful"
