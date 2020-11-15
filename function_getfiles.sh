@@ -34,7 +34,7 @@ function getfiles () {
   elif [[ "$TARGET" == "mariadb_config" ]]
   then
    # declare array of mariadb config files to back up
-   MARIADB_CONFIG_FILES=("/etc/my.cnf" "/etc/mysql/my.cnf" "$HOME/.my.cnf")
+   MARIADB_CONFIG_FILES=("/etc/my.cnf")
    #echo "${FILES[@]}"
   elif [[ "$TARGET" == "mariadb_data" ]]
   then
