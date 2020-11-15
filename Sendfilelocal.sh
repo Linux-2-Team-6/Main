@@ -30,6 +30,6 @@ fi
 
 
 
-Sendfile "$1" "$2"
+Sendfile
 
 exit
