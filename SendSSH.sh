@@ -42,4 +42,4 @@ fi
 }
 
 # test / debug
-sendremote "$1" "$2" "$3"
+sendremote
