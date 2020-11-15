@@ -27,5 +27,3 @@ echo "${THETARGET[@]}" This is only for testing purposes.
 		tar --backup -cvzf backups.tar.gz "${THETARGET[@]}" # Here we create the zip and compress it.
 	fi
 }
-
-packnpress $@
