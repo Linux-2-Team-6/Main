@@ -37,5 +37,5 @@ elif [[ "$PARAM" == "-m" ]] || [[ "$PARAM" == "--man" ]] || [[ "$PARAM" == "" ]]
 then
  cat "floppy"
  echo
- welcomemenu # replace with Rickards menu
+ welcomemenu
 fi
