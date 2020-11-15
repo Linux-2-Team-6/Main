@@ -8,13 +8,12 @@ unpack-unpress () {
 #echo $THETARFILE
 	if [[ ! -f "$THETARFILE" ]] # Checks if the file is an acceptable format.
 	then
-		echo "Not a valid source"
-		exit
+		echo "Not a valid source"	
 
 	else
-			tar -xvzf "$THETARFILE" # Here we the unpacking and uncompressing
+		tar -xvzf "$THETARFILE" # Here we the unpacking and uncompressing
 
-			echo "Succesfully Unpacked!"	
+		echo "Succesfully Unpacked!"	
 		fi
 	}
 
