@@ -33,15 +33,6 @@ then
 elif [[ "$PARAM" == "-f" ]] || [[ "$PARAM" == "--full" ]] # Run full backup (used for scheduling)
 then
  backup full
- if [[ "$LOG_STATUS" -eq 0 ]] # Check if function backup returned success
- then
-  echo "Backup successful"
- elif [[ "$LOG_STATUS" -eq 1 ]] # or fail
- then
-  echo "Backup failed"
- else # or unknown error
-  echo "Backup ERROR"
- fi
 elif [[ "$PARAM" == "-m" ]] || [[ "$PARAM" == "--man" ]] || [[ "$PARAM" == "" ]] # Load the user config menu (used for partial/manual backups)
 then
  cat "floppy"
