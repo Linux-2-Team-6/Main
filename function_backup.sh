@@ -9,13 +9,13 @@
 #***********************************#
 
 # source the functions needed
-source function_getfiles.sh
-# source pack
-# source unpack
-source function_hashme.sh
-# source move
-source function_encryption.sh
-source function_writelog.sh
+source function_getfiles.sh # function for getting the files to backup
+source packncomp.sh # function for packing and compressing files and dirs
+source unpack.sh # function for unpacking tar.gz files
+source function_hashme.sh # function for hashing files
+source function_encryption.sh # function for encrypting file
+source SendSSH.sh # function for moving files to remote server
+source function_writelog.sh # function for writing to the log
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 # backup ()                                         #
@@ -34,66 +34,107 @@ function backup () {
 
  # testing getfiles
  #+ send these to pack next
+ BACKUP_FILES=
  local GET_TARGET=$1
  if [[ "$GET_TARGET" == "full" ]] # get all the files
  then
+  echo "Running full backup..."
   getfiles nginx_config nginx_data mariadb_config mariadb_data sysconfig home # get all the arrays
-  echo "${NGINX_CONFIG_FILES[@]}"
-  echo "${NGINX_DATA_FILES[@]}"
-  echo "${MARIADB_CONFIG_FILES[@]}"
-  echo "${MARIADB_DATA_FILES[@]}"
-  echo "${SYS_FILES[@]}"
-  echo "${HOME_FILES[@]}"
+  #"${NGINX_CONFIG_FILES[@]}"
+  #"${NGINX_DATA_FILES[@]}"
+  #"${MARIADB_CONFIG_FILES[@]}"
+  #"${MARIADB_DATA_FILES[@]}"
+  #"${SYS_FILES[@]}"
+  #"${HOME_FILES[@]}"
+  BACKUP_FILES=("${NGINX_CONFIG_FILES[@]}" "${NGINX_DATA_FILES[@]}" "${MARIADB_CONFIG_FILES[@]}" "${MARIADB_DATA_FILES[@]}" "${SYS_FILES[@]}" "${HOME_FILES[@]}")
+  #"${BACKUP_FILES[@]}"
  elif [[ "$GET_TARGET" == "nginx_config" ]] # get nginx config files
  then
+  echo "Running nginx config backup..."
   getfiles nginx_config # returns array NGINX_CONFIG_FILES
-  echo "${NGINX_CONFIG_FILES[@]}"
+  #"${NGINX_CONFIG_FILES[@]}"
+  BACKUP_FILES=("${NGINX_CONFIG_FILES[@]}")
+  #echo "${BACKUP_FILES[@]}"
  elif [[ "$GET_TARGET" == "nginx_data" ]] # get nginx data files
  then
+  echo "Running nginx data backup..."
   getfiles nginx_data # returns array NGINX_DATA_FILES
-  echo "${NGINX_DATA_FILES[@]}"
+  #"${NGINX_DATA_FILES[@]}"
+  BACKUP_FILES=("${NGINX_DATA_FILES[@]}")
+  #echo "${BACKUP_FILES[@]}"
  elif [[ "$GET_TARGET" == "mariadb_config" ]] # get mariadb config files
  then
+  echo "Running MariaDB config backup..."
   getfiles mariadb_config # returns array MARIADB_CONFIG_FILES
-  echo "${MARIADB_CONFIG_FILES[@]}"
+  #"${MARIADB_CONFIG_FILES[@]}"
+  BACKUP_FILES=("${MARIADB_CONFIG_FILES[@]}")
+  #echo "${BACKUP_FILES[@]}"
  elif [[ "$GET_TARGET" == "mariadb_data" ]] # get mariadb data files
  then
+  echo "Running MariaDB data backup..."
   getfiles mariadb_data # returns array MARIADB_DATA_FILES
-  echo "${MARIADB_DATA_FILES[@]}"
+  #"${MARIADB_DATA_FILES[@]}"
+  BACKUP_FILES=("${MARIADB_DATA_FILES[@]}")
+  #echo "${BACKUP_FILES[@]}"
  elif [[ "$GET_TARGET" == "sysconfig" ]] # get sys config files
  then
+  echo "Running system config backup..."
   getfiles sysconfig # returns array SYS_FILES
-  echo "${SYS_FILES[@]}"
+  #"${SYS_FILES[@]}"
+  BACKUP_FILES=("${SYS_FILES[@]}")
+  #echo "${BACKUP_FILES[@]}"
  elif [[ "$GET_TARGET" == "home" ]] # get home dir
  then
+  echo "Running home dir backup..."
   getfiles home # returns array HOME_FILES
-  echo "${HOME_FILES[@]}"
+  #"${HOME_FILES[@]}"
+  BACKUP_FILES=("${HOME_FILES[@]}")
+  #echo "${BACKUP_FILES[@]}"
  fi
- # WORKS -------------
 
- # testing pack
+ # pack files
+ packnpress "${BACKUP_FILES[@]}"
+ echo "Packing files as $PACK_FILENAME"
+ #"$PACK_FILENAME"
 
- # testing hash
- res1=$(hashme backups.log)
- res2=$(hashme backups.log)
- if [[ "$res1" == "$res2" ]]
+ # encrypt packed files
+ encrypt "$PACK_FILENAME"
+ if [[ $ENCRYPT_STATUS -eq 0 ]]
  then
- 	echo "Checksum match"
- 	#echo "$res1 is equal to $res2"
+  echo "Encrypting file as $ENCRYPTED_FILENAME"
+  echo "Removing unencrypted file $PACK_FILENAME"
  else
- 	echo "Checksum missmatch"
+  echo "Encryption failed"
  fi
- # WORKS -------------
+ #"$ENCRYPTED_FILENAME"
 
- # testing move
+ # hash encrypted file and save result
+ res1=$(hashme "$ENCRYPTED_FILENAME")
+ echo "Checksum: $res1"
 
- # testing encryption
- #encrypt derp
- #decrypt derp.gpg
- # WORKS -------------
+ # move file
+ # sendremote "$ENCRYPTED_FILENAME" <remote server> <remote dir>
+ # $SEND_STATUS
 
- # testing write to log
- writelog 0 backup-test.tar.gz
- # WORKS -------------
+ # hash file again and compare to old hash
+ #res2=$(hashme XXX) # input the new path to file on remote server
+ #if [[ "$res1" == "$res2" ]]
+ #then
+ #	echo "Checksum match"
+ #else
+ #	echo "Checksum missmatch"
+ #fi
+
+ # write success/fail and filename to log
+ if [[ "$SEND_STATUS" -eq 0 ]]
+ then 
+  writelog 0 "$ENCRYPTED_FILENAME"
+  echo -e "Backup \e[92msuccessful\e[0m"
+  echo
+ else
+  writelog 1 "$ENCRYPTED_FILENAME"
+  echo -e "Backup \e[91mfailed\e[0m"
+  echo
+ fi
 
  }

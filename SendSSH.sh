@@ -1,7 +1,6 @@
 #!/bin/bash
 
-function sendremote(){
-
+function sendremote() {
 
 local FILE=$1			# filnamn
 local REM_SER=$2		# Peter@centos
@@ -38,8 +37,7 @@ else
 	fi
 fi
 
-
 }
 
 # test / debug
-sendremote
+#sendremote

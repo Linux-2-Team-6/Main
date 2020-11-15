@@ -33,10 +33,9 @@ function encrypt () {
   if [[ $? -eq 0 ]] # If encryption was successful
   then
    ENCRYPT_STATUS=$CRYPTO_SUCCESS # Set status to success
-   echo "\"$FILENAME\" encrypted as \"$FILENAME.gpg\"" # Print out the new filename
-   #rm $FILENAME # Remove the old unencrypted file
+   ENCRYPTED_FILENAME="$FILENAME.gpg"
+   rm "$FILENAME" # Remove the old unencrypted file
   else # If encryption failed
-   echo "Encryption failed" 
    ENCRYPT_STATUS=$CRYPTO_FAIL # Set status to fail
   fi
  else # If file doesn't exist, return fail

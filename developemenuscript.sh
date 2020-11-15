@@ -85,7 +85,7 @@ echo
         "B" | "b" ) backup mariadb_config;;
         "C" | "c" ) backup nginx_config;;
         "D" | "d" ) backup mariadb_config nginx_config;;
-        "E" | "e" ) backup sys_config
+        "E" | "e" ) backup sysconfig;;
         "F" | "f" ) return;;
         "G" | "g" ) exit 0;;
                 * ) echo "Please choose an option that is displayed "
@@ -210,6 +210,6 @@ echo
 done
 }
 
-welcomemenu "$@"
+#welcomemenu "$@"
 
-exit 0
+#exit 0

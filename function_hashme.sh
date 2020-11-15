@@ -19,11 +19,11 @@ HASH_FAIL=1
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 function hashme () {
- local FILENAME=$1 # Pass argument 1 to FILENAME
+ local FILENAME="$1" # Pass argument 1 to FILENAME
  if [[ -f "$FILENAME" ]] # Check if file exists, return file hash and success
  then
   file_hash=$(sha256sum "$FILENAME")
-  echo $file_hash
+  echo "$file_hash"
   HASH_STATUS=$HASH_SUCCESS
  else # if file doesn't exist, return fail
   HASH_STATUS=$HASH_FAIL

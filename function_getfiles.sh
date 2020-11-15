@@ -43,7 +43,7 @@ function getfiles () {
   elif [[ "$TARGET" == "sysconfig" ]]
   then
    # declare array of system config files to back up
-   SYS_FILES=("/etc/profile" "/etc/profile.d/" "/etc/bashrc" "/etc/sysctl.conf" "/etc/sysctl.d/" "/etc/resolve.conf" "/etc/passwd" "/etc/sysconfig/network-scripts/")
+   SYS_FILES=("/etc/profile" "/etc/profile.d/" "/etc/bashrc" "/etc/sysctl.conf" "/etc/sysctl.d/" "/etc/resolv.conf" "/etc/passwd" "/etc/sysconfig/network-scripts/if*")
    #echo "${FILES[@]}"
   elif [[ "$TARGET" == "home" ]]
   then

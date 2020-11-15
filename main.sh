@@ -8,8 +8,8 @@
 # Main script v0.1                  #
 #***********************************#
 
-source function_menu.sh
-source function_backup.sh
+source developemenuscript.sh # Welcome menu
+source function_backup.sh # the actual backup function where the magic happens
 # source restore
 # source schedule
 
@@ -32,8 +32,7 @@ then
  echo
 elif [[ "$PARAM" == "-f" ]] || [[ "$PARAM" == "--full" ]] # Run full backup (used for scheduling)
 then
- echo "Running full backup..."
- backup full
+ backup sysconfig
  if [[ "$LOG_STATUS" -eq 0 ]] # Check if function backup returned success
  then
   echo "Backup successful"
@@ -45,6 +44,7 @@ then
  fi
 elif [[ "$PARAM" == "-m" ]] || [[ "$PARAM" == "--man" ]] || [[ "$PARAM" == "" ]] # Load the user config menu (used for partial/manual backups)
 then
- echo "Loading user menu..."
+ cat "floppy"
+ echo
  welcomemenu # replace with Rickards menu
 fi
