@@ -5,22 +5,16 @@
 unpack-unpress () {
 
 	THETARFILE=$1 # The chosen files
-
+#echo $THETARFILE
 	if [[ ! -f "$THETARFILE" ]] # Checks if the file is an acceptable format.
 	then
 		echo "Not a valid source"
 		exit
-	fi
 
-#echo $THETARFILE	
-
-		if [[ -f "$THETARFILE" ]]
-		then
+	else
 			tar -xvzf "$THETARFILE" # Here we the unpacking and uncompressing
 
 			echo "Succesfully Unpacked!"	
-		else
-			echo "An error occured"
 		fi
 	}
 
