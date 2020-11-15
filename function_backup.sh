@@ -32,8 +32,7 @@ function backup () {
  # hash again and compare to earlier hash
  # write success/fail to log
 
- # testing getfiles
- #+ send these to pack next
+ # get the actual files to backup
  BACKUP_FILES=
  local GET_TARGET=$1
  if [[ "$GET_TARGET" == "full" ]] # get all the files
