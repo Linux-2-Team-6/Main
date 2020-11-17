@@ -52,6 +52,8 @@ function encrypt () {
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 function decrypt () {
+ local LOCAL_DIR=Backup/
+
  local FILENAME=$1 # Pass argument 1 to FILENAME
  if [[ -f "$FILENAME" ]] # Check if file exists, return XX? and success
  then
@@ -60,13 +62,13 @@ function decrypt () {
   read -ra NEWFILENAME <<< "$FILENAME" # split FILENAME by delimiter
   
   # Decrypt file ---
-  gpg -d "$FILENAME" > "${NEWFILENAME[0]}" # Decrypt file
+  gpg -d "$FILENAME" > "${NEWFILENAME[0]}.${NEWFILENAME[1]}.${NEWFILENAME[2]}" # Decrypt file
   if [[ $? -eq 0 ]] # If decryption was successful
   then
    DECRYPT_STATUS=$CRYPTO_SUCCESS # Set status to success
-   echo "\"$FILENAME\" decrypted as \"$NEWFILENAME\"" # Print out the new(old) filename
+   rm "$FILENAME"
   else # If encryption failed
-   echo "Decryption failed" 
+   #echo "Decryption failed" 
    DECRYPT_STATUS=$CRYPTO_FAIL # Set status to fail
   fi
  else # if file doesn't exist, return fail

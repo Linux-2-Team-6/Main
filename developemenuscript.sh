@@ -8,7 +8,9 @@
 # A Menu for making backups                #
 #******************************************#
   
+# source the needed functions  
 source function_backup.sh
+source function_restore.sh
 
 # Open ups a menu so that that user kan choose
 # Which directories/configfiles/databases that should be backup
@@ -204,7 +206,7 @@ echo
         "D" | "d" ) funcyconfig;;
         "E" | "e" ) funcyhomedir;;
         "F" | "f" ) funcydatabaseAhomedir;;
-        "G" | "g" ) ;;
+        "G" | "g" ) restore;;
         "H" | "h" ) break;;
     esac
 done

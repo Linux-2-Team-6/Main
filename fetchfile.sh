@@ -3,13 +3,13 @@
 function fetchremote() {
 
 
-local FILE=$1			# filnamn
-local REM_SER=$2		# Peter@centos
-local REM_DIR=$3		# /home/peter/Junk
+local FILE="$1"			# filnamn
+local REM_SER="$2"		# Peter@centos
+local REM_DIR="$3"		# /home/peter/Junk
 
-LOCAL_DIR=/home/$USER/Backup/
+LOCAL_DIR=Backup/
 FETCH_SUCESS=0
-SEND_FAIL=1
+FETCH_FAIL=1
 
 
 if [[ ! -d "$LOCAL_DIR" ]]; then
@@ -23,7 +23,7 @@ if [[ ! -d "$LOCAL_DIR" ]]; then
 			FETCH_STATUS=$FETCH_SUCESS
 		else 					# if fetch failed
 			echo "Something went wrong in fetching the file from the remote server $REM_SER."
-			SEND_STATUS=$FETCH_FAIL
+			FETCH_STATUS=$FETCH_FAIL
 		fi
 	fi
 
