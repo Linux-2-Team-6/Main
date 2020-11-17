@@ -1,0 +1,4 @@
+# Remote backup server
+REMOTE_SERVER="192.168.2.18"
+# Remote backup directory
+REMOTE_DIR="$HOME/Backups"

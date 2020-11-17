@@ -26,6 +26,8 @@ if [[ "$PARAM" == "-h" ]] || [[ "$PARAM" == "--help" ]] # Display help text
 then
  echo "Usage: main.sh [OPTION]"
  echo
+ echo "Edit the CONFIG file to enter your remote backup server."
+ echo
  echo -e '-h, --help\tDisplays this help and exit'
  echo -e "-f, --full\tRuns a full (system config files, web and db, home dir)\n\t\tbackup on your system"
  echo -e "-m, --man\tRun manual backups on desired files and applications"

@@ -8,6 +8,9 @@
 # backup logical flow               #
 #***********************************#
 
+# Import the CONFIG
+source CONFIG
+
 # source the functions needed
 source function_getfiles.sh # function for getting the files to backup
 source packncomp.sh # function for packing and compressing files and dirs
@@ -108,11 +111,11 @@ function backup () {
  #"$ENCRYPTED_FILENAME"
 
  # hash encrypted file and save result
- res1=$(hashme "$ENCRYPTED_FILENAME")
- echo "Checksum: $res1"
+ CHECKSUM=$(hashme "$ENCRYPTED_FILENAME")
+ echo "Checksum: $CHECKSUM"
 
  # move file
- # sendremote "$ENCRYPTED_FILENAME" <remote server> <remote dir>
+ sendremote "$ENCRYPTED_FILENAME" "$REMOTE_SERVER" "$REMOTE_DIR"
  # $SEND_STATUS
 
  # hash file again and compare to old hash
@@ -127,11 +130,11 @@ function backup () {
  # write success/fail and filename to log
  if [[ "$SEND_STATUS" -eq 0 ]]
  then 
-  writelog 0 "$ENCRYPTED_FILENAME"
+  writelog 0 "$CHECKSUM"
   echo -e "Backup \e[92msuccessful\e[0m"
   echo
  else
-  writelog 1 "$ENCRYPTED_FILENAME"
+  writelog 1 "$CHECKSUM"
   echo -e "Backup \e[91mfailed\e[0m"
   echo
  fi
