@@ -1,14 +1,14 @@
 # Main
 # RÖR EJ DENNA README!
 
-Usage: main.sh [OPTION]
+## Usage: main.sh [OPTION]
 
 ONLY edit the CONFIG file with your remote backup server to point the script to the correct target.
  
-Allowed OPTIONS:
+## Allowed OPTIONS:
 
--h, --help    Displays this help and exit
+**-h, --help**      Displays this help and exit
 
--f, --full    Runs a full (system config files, web and db, home dir)\n\t\tbackup on your system"
+**-f, --full**      Runs a full (system config files, web and db, home dir)\n\t\tbackup on your system"
 
--m, --man     Run manual backups on desired files and applications"
+**-m, --man**       Run manual backups on desired files and applications"
