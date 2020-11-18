@@ -19,9 +19,9 @@ source fetchfile.sh # function for fetching files from remote server
 source function_writelog.sh # function for writing to the log
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
-# backup ()                                         #
-# Parameter: nginx_config, nginx_data,              #
-# mariadb_config, mariadb_data, sysconfig, home     #
+# restore ()                                        #
+# Parameter:                                        #
+#                                                   #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 function restore () {
