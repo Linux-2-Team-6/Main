@@ -9,8 +9,6 @@
 # up                                #
 #***********************************#
 
-# Check if there are more files for nginx, mariadb, sysconfig
-
 #+++++++++++++++++++++++++++++++++++++++++++++++++++#
 # getfiles ()                                       #
 # Parameters: nginx, mariadb, sysconfig and/or home #
@@ -26,7 +24,7 @@ function getfiles () {
   if [[ "$TARGET" == "nginx_config" ]]
   then
    # declare array of nginx files to back up
-   NGINX_CONFIG_FILES=("/etc/nginx/nginx.conf" "/etc/nginx/conf.d/" "/etc/nginx/sites-available/")
+   NGINX_CONFIG_FILES=("/etc/nginx/nginx.conf" "/etc/nginx/conf.d/")
    #echo "${FILES[@]}"
   elif [[ "$TARGET" == "nginx_data" ]]
   then
@@ -47,7 +45,7 @@ function getfiles () {
    #echo "${FILES[@]}"
   elif [[ "$TARGET" == "home" ]]
   then
-   HOME_FILES=("$HOME/")
+   HOME_FILES=("$HOME/") # rethink this to only include important files in home
    #echo "${FILES[@]}"
   fi
 

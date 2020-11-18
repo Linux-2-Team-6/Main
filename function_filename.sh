@@ -10,6 +10,8 @@
 
 function filename () {
 
+BACKUP_FILENAME= # reset it
+
 # get hostname
 local HOSTNAME=$(hostname)
 IFS='.'

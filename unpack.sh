@@ -2,17 +2,17 @@
 
 # This script will unpack and uncompress your zipfile.
 
+source fetchfile.sh
+
 unpack-unpress () {
 
-	THETARFILE=$1 # The chosen files
-#echo $THETARFILE
+	THETARFILE="$1" # The chosen files
+	#echo "$THETARFILE"
 	if [[ ! -f "$THETARFILE" ]] # Checks if the file is an acceptable format.
 	then
-		echo "Not a valid source"	
-
+		echo -e "$THETARFILE - \e[91mNot a valid source\e[0m"	
 	else
-		tar -xvzf "$THETARFILE" # Here we the unpacking and uncompressing
-
-		echo "Succesfully Unpacked!"	
-		fi
-	}
+		tar -xvzf "$THETARFILE" -C "$LOCAL_DIR" # Here we the unpacking and uncompressing
+		echo -e "\e[92mSuccessfully\e[0m unpacked!"	
+	fi
+}
