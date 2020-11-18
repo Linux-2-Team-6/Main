@@ -12,3 +12,5 @@ ONLY edit the CONFIG file with your remote backup server to point the script to 
 
 ### Dependencies
 If you're running a minimal version of your distro (CLI only) - you will need to install "pinentry" for the manual input of a passphrase to gpg encryption.
+
+* CentOS - dnf install pinentry
