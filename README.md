@@ -1,6 +1,3 @@
-# Main
-# RÖR EJ DENNA README!
-
 ### Usage: main.sh [OPTION]
 
 ONLY edit the CONFIG file with your remote backup server to point the script to the correct target.
